@@ -1,0 +1,6 @@
+.git/
+.github/
+.meteor/local/
+node_modules/
+Dockerfile
+*.md
