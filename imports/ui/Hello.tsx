@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { Users } from "../api/Users";
-import { Authorize } from "./components/Autthorize";
+import { Authorize } from "./components/Authorize";
 
 export const Hello = () => {
   const [counter, setCounter] = useState(0);
@@ -17,9 +18,10 @@ export const Hello = () => {
       <Authorize>
         <p>You can see this only if you are logged in.</p>
       </Authorize>
-      <Authorize role={"admin"}>
+      <Authorize roles={["admin"]}>
         <p>You can see this only if you are logged in and are an admin.</p>
       </Authorize>
+      <Link to="/admin">Try accessing /admin</Link>
     </div>
   );
 };
