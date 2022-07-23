@@ -15,11 +15,6 @@ export const meteorizeError = (fn: Function) => {
   }
 };
 
-const checkRoles = (userId: string, roles: Role[]) => {
-  const userRoles = Meteor.users.findOne(userId, { fields: { roles: 1 } })?.roles ?? [];
-  if (!roles.some((role) => userRoles?.includes(role))) throw new Meteor.Error("not-authorized", "You do not have the required roles");
-};
-
 type MethodType = (this: Meteor.MethodThisType, ...args: any[]) => any;
 
 interface RoleGuardedMethodProps<TRun extends MethodType> {
@@ -33,7 +28,10 @@ export const RoleGuardedMethod = <TRun extends MethodType>({ run, roles, name }:
     name,
     guard() {
       if (!this.userId && (this.connection || this.isSimulation)) throw new Meteor.Error("not-authorized", "You must be logged in");
-      if (roles && this.userId) checkRoles(this.userId, roles);
+      if (roles && this.userId) {
+        const userRoles = Meteor.users.findOne(this.userId, { fields: { roles: 1 } })?.roles ?? [];
+        if (!roles.some((role) => userRoles?.includes(role))) throw new Meteor.Error("not-authorized", "You do not have the required roles");
+      }
     },
     run,
   });
