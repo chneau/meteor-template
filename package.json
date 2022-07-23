@@ -1,0 +1,32 @@
+{
+  "name": "meteor-template",
+  "private": true,
+  "scripts": {
+    "start": "meteor run --exclude-archs=web.browser.legacy",
+    "update": "meteor update --all-packages && npm exec --yes npm-check-updates@latest -- --upgrade --target=minor && npm update",
+    "check": "npm exec tsc -- --noEmit --skipLibCheck",
+    "format": "npm exec --yes prettier@latest -- --write . --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.18.9",
+    "bootstrap": "^5.2.0",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.4.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/meteor": "^2.7.1",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "typescript": "^4.7.4"
+  },
+  "meteor": {
+    "mainModule": {
+      "client": "client/main.tsx",
+      "server": "server/main.ts"
+    }
+  },
+  "prettier": {
+    "printWidth": 150
+  }
+}

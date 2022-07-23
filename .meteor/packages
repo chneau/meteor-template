@@ -1,0 +1,9 @@
+meteor-base
+mongo
+standard-minifier-css
+standard-minifier-js
+typescript
+hot-module-replacement
+static-html
+react-meteor-data
+accounts-password
