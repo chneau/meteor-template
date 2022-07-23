@@ -5,21 +5,21 @@ type NeverReturnPromise<TRun extends AnyMethod> = TRun extends (...args: any[]) 
 type AlwaysReturnPromise<TRun extends AnyMethod> = Promise<NeverReturnPromise<TRun>>;
 type TypedMethodProps<TRun extends AnyMethod> = {
   name: string;
-  guard?: (context: Meteor.MethodThisType) => void;
+  guard?: (this: Meteor.MethodThisType) => void;
   run: TRun;
   isServerSide?: boolean;
 } & ThisType<Meteor.MethodThisType>;
 export class TypedMethod<TRun extends AnyMethod> {
   private readonly name: string;
   constructor({ name, run, guard, isServerSide }: TypedMethodProps<TRun>) {
-    guard ??= (context: Meteor.MethodThisType) => {
-      if (!context.userId && (context.connection || context.isSimulation)) throw new Meteor.Error("not-authorized", "You must be logged in");
+    guard ??= function () {
+      if (!this.userId && (this.connection || this.isSimulation)) throw new Meteor.Error("not-authorized", "You must be logged in");
     };
     this.name = name;
     if (isServerSide && !Meteor.isServer) return;
     Meteor.methods({
       async [name](...args) {
-        guard!(this);
+        guard?.bind(this)();
         return run.bind(this)(...args);
       },
     });
