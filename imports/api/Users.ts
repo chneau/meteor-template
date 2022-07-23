@@ -27,7 +27,7 @@ interface CreateWithRolesOptions extends AccountsCreateUserOptions {
   roles?: Role[];
 }
 
-const createWithRoles = (options: CreateWithRolesOptions) => {
+const create = (options: CreateWithRolesOptions) => {
   const userId = Accounts.createUser(options);
   if (userId) Meteor.users.update(userId, { $set: { roles: options.roles } });
   return userId;
@@ -35,7 +35,7 @@ const createWithRoles = (options: CreateWithRolesOptions) => {
 
 export const Users = {
   find: UsersCollection.find.bind(UsersCollection),
-  create: createWithRoles,
+  create,
   update: updateMethod(UsersCollection, UserSchema, ["admin"]),
   schema: UserSchema,
 };
