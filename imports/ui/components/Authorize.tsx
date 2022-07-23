@@ -14,13 +14,13 @@ export const Authorize = ({ roles, children }: AuthCheckProps) => {
   return <>{children}</>;
 };
 
-export const privateRoute = ({ path, element, roles }: { path: string; element: ReactNode; roles: Role[] }) => (
+export const privateRoute = ({ path, element, roles }: { path: string; element: ReactNode; roles?: Role[] }) => (
   <Route path={path} element={<PrivateRouteGuard roles={roles} />}>
     <Route path={path} element={element} />
   </Route>
 );
 
-const PrivateRouteGuard = ({ roles }: { roles: Role[] }) => {
+const PrivateRouteGuard = ({ roles }: { roles?: Role[] }) => {
   const { user, userId } = useContext(AccountContext);
   if (userId != null && user == null) return <></>; // waits full data loading
   if (roles == null) return <Outlet />;
