@@ -37,5 +37,7 @@ export const Users = {
   find: UsersCollection.find.bind(UsersCollection),
   create,
   update: updateMethod(UsersCollection, UserSchema, ["admin"]),
+  loginWithPassword: Meteor.loginWithPassword?.bind(Meteor),
+  logout: Accounts.logout?.bind(Accounts),
   schema: UserSchema,
 };
