@@ -2,7 +2,7 @@ import { useTracker } from "meteor/react-meteor-data";
 import { Link, Links } from "../api/Links";
 
 export const Info = () => {
-  const links = useTracker(() => Links.subAll.fetch());
+  const links = useTracker(() => Links.subAll());
 
   const makeLink = (link: Link) => {
     return (

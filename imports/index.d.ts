@@ -5,3 +5,11 @@ declare module "meteor/meteor" {
     }
   }
 }
+
+declare module "meteor/mongo" {
+  namespace Mongo {
+    interface Collection<T extends import("mongodb").Document, U = T> {
+      _name: string;
+    }
+  }
+}

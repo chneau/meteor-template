@@ -1,7 +1,6 @@
 import { Mongo } from "meteor/mongo";
 import { object, ObjectSchema, string } from "yup";
-import { TypedSubscribe } from "../typed-subscribe";
-import { deleteMethod, insertMethod, updateMethod } from "./common";
+import { deleteMethod, insertMethod, subscribeAll, subscribeOne, subscribeSome, updateMethod } from "./common";
 
 export interface Link {
   _id?: string | null;
@@ -9,7 +8,7 @@ export interface Link {
   url: string;
 }
 
-export const LinkSchema: ObjectSchema<Link> = object({
+const LinkSchema: ObjectSchema<Link> = object({
   _id: string().nullable(),
   title: string().required().label("Title"),
   url: string().required().label("URL"),
@@ -17,16 +16,14 @@ export const LinkSchema: ObjectSchema<Link> = object({
 
 const LinksCollection = new Mongo.Collection<Link>("links");
 
-const LinksAll = new TypedSubscribe({
-  name: "links.all",
-  guard: () => true,
-  run: () => LinksCollection.find({}, { sort: { createdAt: -1 } }),
-});
-
 export const Links = {
   find: LinksCollection.find.bind(LinksCollection),
+  remove: LinksCollection.remove.bind(LinksCollection),
   insert: insertMethod(LinksCollection, LinkSchema),
   update: updateMethod(LinksCollection, LinkSchema),
   delete: deleteMethod(LinksCollection),
-  subAll: LinksAll,
+  subAll: subscribeAll(LinksCollection),
+  subSome: subscribeSome(LinksCollection),
+  subOne: subscribeOne(LinksCollection),
+  schema: LinkSchema,
 };

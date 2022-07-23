@@ -29,5 +29,4 @@ export class TypedSubscribe<TRun extends CursorFn> {
     Meteor.subscribe?.(this.name, ...args);
     return this.run(...args).fetch();
   };
-  subscribe = (...args: Parameters<TRun>): Meteor.SubscriptionHandle => Meteor.subscribe?.(this.name, ...args);
 }
