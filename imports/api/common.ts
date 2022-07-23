@@ -20,13 +20,15 @@ const checkRoles = (userId: string, roles: Role[]) => {
   if (!roles.some((role) => userRoles?.includes(role))) throw new Meteor.Error("not-authorized", "You do not have the required roles");
 };
 
-interface RoleGuardedMethodProps<TRun extends (this: Meteor.MethodThisType, ...args: any[]) => any> {
+type MethodType = (this: Meteor.MethodThisType, ...args: any[]) => any;
+
+interface RoleGuardedMethodProps<TRun extends MethodType> {
   run: TRun;
   roles?: Role[];
   name: string;
 }
 
-const RoleGuardedMethod = <TRun extends (this: Meteor.MethodThisType, ...args: any[]) => any>({ run, roles, name }: RoleGuardedMethodProps<TRun>) => {
+export const RoleGuardedMethod = <TRun extends MethodType>({ run, roles, name }: RoleGuardedMethodProps<TRun>) => {
   const result = new TypedMethod({
     name,
     guard() {

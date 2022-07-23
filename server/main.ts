@@ -1,11 +1,8 @@
 import { Links } from "/imports/api/Links";
 
-const insertLink = (title: string, url: string) => Links.insert({ title, url });
-
-// If the Links collection is empty, add some data.
 if (Links.find().count() === 0) {
-  insertLink("Do the Tutorial", "https://www.meteor.com/tutorials/react/creating-an-app");
-  insertLink("Follow the Guide", "http://guide.meteor.com");
-  insertLink("Read the Docs", "https://docs.meteor.com");
-  insertLink("Discussions", "https://forums.meteor.com");
+  Links.insert({ title: "Do the Tutorial", url: "https://www.meteor.com/tutorials/react/creating-an-app" });
+  Links.insert({ title: "Follow the Guide", url: "http://guide.meteor.com" });
+  Links.insert({ title: "Read the Docs", url: "https://docs.meteor.com" });
+  Links.insert({ title: "Discussions", url: "https://forums.meteor.com" });
 }
