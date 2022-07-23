@@ -1,4 +1,7 @@
+import { printEnvVars } from "./printEnvVars";
 import { Links } from "/imports/api/Links";
+
+printEnvVars();
 
 if (Links.find().count() === 0) {
   Links.insert({ title: "Do the Tutorial", url: "https://www.meteor.com/tutorials/react/creating-an-app" });
