@@ -1,7 +1,7 @@
 declare module "meteor/meteor" {
   namespace Meteor {
     interface User {
-      roles?: string[] | null;
+      roles?: import("imports/api/common").Role[] | null;
     }
   }
 }
