@@ -6,6 +6,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PrivateRoute } from "/imports/ui/components/Authorize";
 import { AccountProvider } from "/imports/ui/contexts/AccountContext";
+import { AdminPage } from "/imports/ui/pages/AdminPage";
 import { HomePage } from "/imports/ui/pages/HomePage";
 
 const container = document.getElementById("react-target");
@@ -16,7 +17,7 @@ root.render(
       <AccountProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          {PrivateRoute({ path: "/admin", element: <HomePage />, roles: ["admin"] })}
+          {PrivateRoute({ path: "/admin", element: <AdminPage />, roles: ["admin"] })}
         </Routes>
       </AccountProvider>
     </BrowserRouter>
