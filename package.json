@@ -8,19 +8,19 @@
     "format": "npm exec --yes prettier@latest -- --write . --ignore-path .gitignore"
   },
   "dependencies": {
-    "@babel/runtime": "^7.18.9",
-    "bootstrap": "^5.2.0",
+    "@babel/runtime": "^7.20.1",
+    "bootstrap": "^5.2.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.3.0",
-    "yup": "^1.0.0-beta.4"
+    "react-router-dom": "^6.4.3",
+    "yup": "^1.0.0-beta.7"
   },
   "devDependencies": {
-    "@types/meteor": "^2.7.1",
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
-    "typescript": "^4.7.4"
+    "@types/meteor": "^2.8.0",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "typescript": "^4.8.4"
   },
   "meteor": {
     "mainModule": {
