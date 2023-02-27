@@ -6,7 +6,7 @@ import { TypedMethod } from "../typed-method";
 import { TypedSubscribe } from "../typed-subscribe";
 
 export const Roles = <const>["admin"];
-export type Role = typeof Roles[number];
+export type Role = (typeof Roles)[number];
 
 export const meteorizeError = (fn: Function) => {
   try {
