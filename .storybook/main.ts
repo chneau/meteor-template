@@ -19,7 +19,4 @@ export default {
   },
 } satisfies StorybookConfig;
 
-export const viteFinal: ViteFinal = async (config, options) => {
-  config.clearScreen = false;
-  return config;
-};
+export const viteFinal: ViteFinal = (config) => ({ ...config, clearScreen: false });
