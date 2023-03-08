@@ -15,13 +15,23 @@ export const Hello = () => {
       <Button onClick={increment}>Click Me</Button>
       <p>You've pressed the button {counter} times.</p>
       <ButtonGroup>
-        <Button onClick={() => Users.loginWithPassword("user", "user")} disabled={user?.username == "user"}>
+        <Button
+          onClick={() => Users.loginWithPassword("user", "user")}
+          disabled={user?.username == "user"}
+        >
           Login as user
         </Button>
-        <Button onClick={() => Users.loginWithPassword("admin", "admin")} disabled={user?.username == "admin"}>
+        <Button
+          onClick={() => Users.loginWithPassword("admin", "admin")}
+          disabled={user?.username == "admin"}
+        >
           Login as admin
         </Button>
-        <Button variant="danger" onClick={() => Users.logout()} disabled={!user}>
+        <Button
+          variant="danger"
+          onClick={() => Users.logout()}
+          disabled={!user}
+        >
           Logout
         </Button>
       </ButtonGroup>

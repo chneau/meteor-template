@@ -15,8 +15,14 @@ export const Authorize = ({ roles, children }: AuthCheckProps) => {
 };
 
 export const PrivateRoute = ({ path, element, roles }: { path: string; element: ReactNode; roles?: Role[] }) => (
-  <Route path={path} element={<PrivateRouteGuard roles={roles} />}>
-    <Route path={path} element={element} />
+  <Route
+    path={path}
+    element={<PrivateRouteGuard roles={roles} />}
+  >
+    <Route
+      path={path}
+      element={element}
+    />
   </Route>
 );
 

@@ -16,7 +16,10 @@ root.render(
     <BrowserRouter>
       <AccountProvider>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/"
+            element={<HomePage />}
+          />
           {PrivateRoute({ path: "/admin", element: <AdminPage />, roles: ["admin"] })}
         </Routes>
       </AccountProvider>

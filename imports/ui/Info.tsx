@@ -7,7 +7,10 @@ export const Info = () => {
   const makeLink = (link: Link) => {
     return (
       <li key={link._id}>
-        <a href={link.url} target="_blank">
+        <a
+          href={link.url}
+          target="_blank"
+        >
           {link.title}
         </a>
       </li>
