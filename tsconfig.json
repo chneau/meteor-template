@@ -30,7 +30,7 @@
     },
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "types": ["node"],
+    "types": ["node", "@testing-library/jest-dom"],
     "esModuleInterop": true,
     "preserveSymlinks": true
   },

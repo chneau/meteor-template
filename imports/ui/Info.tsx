@@ -1,26 +1,27 @@
-import { useTracker } from "meteor/react-meteor-data";
-import { Link, Links } from "../api/Links";
+interface Link {
+  _id?: string | null;
+  title: string;
+  url: string;
+}
 
-export const Info = () => {
-  const links = useTracker(() => Links.subAll());
+interface InfoProps {
+  links: Link[];
+}
 
-  const makeLink = (link: Link) => {
-    return (
-      <li key={link._id}>
-        <a
-          href={link.url}
-          target="_blank"
-        >
-          {link.title}
-        </a>
-      </li>
-    );
-  };
-
-  return (
-    <div>
-      <h2>Learn Meteor!</h2>
-      <ul>{links.map(makeLink)}</ul>
-    </div>
-  );
-};
+export const Info = ({ links }: InfoProps) => (
+  <div>
+    <h2>Learn Meteor!</h2>
+    <ul>
+      {links.map((link) => (
+        <li key={link._id}>
+          <a
+            href={link.url}
+            target="_blank"
+          >
+            {link.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
