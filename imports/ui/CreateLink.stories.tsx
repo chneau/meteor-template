@@ -1,6 +1,7 @@
 import { expect } from "@storybook/jest";
 import type { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
+import { Link } from "../api/Links";
 import { CreateLink } from "./CreateLink";
 
 export default {
@@ -17,13 +18,11 @@ export const EmptyCreateLink: StoryObj<typeof CreateLink> = {
   },
 };
 
+let result: Link | null = null;
 export const FilledCreateLink: StoryObj<typeof CreateLink> = {
-  args: {
-    onCreated: (link) => {
-      console.log(link);
-    },
-  },
+  args: { onCreated: (link) => (result = link) },
   play: ({ canvasElement }) => {
+    result = null;
     const canvas = within(canvasElement);
     const title = canvas.getByPlaceholderText("Title");
     const url = canvas.getByPlaceholderText("URL");
@@ -33,5 +32,6 @@ export const FilledCreateLink: StoryObj<typeof CreateLink> = {
     userEvent.click(submit);
     expect(title).toHaveValue("Hello");
     expect(url).toHaveValue("https://www.meteor.com");
+    expect(result).toEqual({ title: "Hello", url: "https://www.meteor.com" });
   },
 };

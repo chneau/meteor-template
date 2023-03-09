@@ -32,7 +32,10 @@ export const CreateLink = ({ onCreated }: CreateLinkProps) => {
         <Button
           variant="primary"
           type="submit"
-          onClick={() => onCreated({ title, url })}
+          onClick={(e) => {
+            e.preventDefault();
+            onCreated({ title, url });
+          }}
         >
           Submit
         </Button>
