@@ -1,4 +1,3 @@
-import type { ViteFinal } from "@storybook/builder-vite";
 import type { StorybookConfig } from "@storybook/react-vite";
 
 export default {
@@ -17,6 +16,5 @@ export default {
   core: {
     disableTelemetry: true,
   },
+  viteFinal: (config) => ({ ...config, clearScreen: false }),
 } satisfies StorybookConfig;
-
-export const viteFinal: ViteFinal = (config) => ({ ...config, clearScreen: false });
