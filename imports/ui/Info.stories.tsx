@@ -4,7 +4,6 @@ import { within } from "@storybook/testing-library";
 import { Info } from "./Info";
 
 export default {
-  title: "Info",
   component: Info,
   args: {
     links: [
@@ -16,9 +15,7 @@ export default {
   },
 } satisfies Meta<typeof Info>;
 
-export const EmptyInfo: StoryObj<typeof Info> = {
-  args: { links: [] },
-};
+export const EmptyInfo: StoryObj<typeof Info> = { args: { links: [] } };
 
 export const FilledInfo: StoryObj<typeof Info> = {
   play: ({ canvasElement }) => {
