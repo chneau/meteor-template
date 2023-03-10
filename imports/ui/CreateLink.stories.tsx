@@ -19,5 +19,6 @@ export const FilledCreateLink: StoryObj<typeof CreateLink> = {
     expect(title).toHaveValue("Hello");
     expect(url).toHaveValue("https://www.meteor.com");
     expect(args.onCreated).toHaveBeenCalledWith({ title: "Hello", url: "https://www.meteor.com" });
+    expect(args.onCreated).toHaveBeenCalledTimes(1);
   },
 };
