@@ -1,4 +1,4 @@
-FROM ghcr.io/chneau/meteor:2.11.0-bullseye-slim AS builder
+FROM ghcr.io/chneau/meteor:2.15 AS builder
 WORKDIR /app
 COPY --chown=meteor:meteor ./package*.json .
 RUN meteor npm ci
@@ -11,4 +11,4 @@ RUN useradd --no-create-home --shell /bin/bash meteor
 USER meteor
 WORKDIR /app
 COPY --from=builder /app/bundle/bundle .
-CMD ["node", "main.js"]
+CMD exec node main.js
