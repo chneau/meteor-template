@@ -24,13 +24,11 @@
 
     /* Module Resolution Options */
     "baseUrl": ".",
-    "paths": {
-      /* Support absolute /imports/* with a leading '/' */
-      "/*": ["*"]
-    },
+    /* Support absolute /imports/* with a leading '/' */
+    "paths": { "/*": ["*"] },
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "types": ["node", "@testing-library/jest-dom"],
+    "types": ["node"],
     "esModuleInterop": true,
     "preserveSymlinks": true
   },
