@@ -21,8 +21,8 @@
 	},
 	"devDependencies": {
 		"@types/meteor": "^2.9.8",
-		"@types/react": "^18.2.64",
-		"@types/react-dom": "^18.2.21",
+		"@types/react": "^18.2.65",
+		"@types/react-dom": "^18.2.22",
 		"typescript": "^5.4.2"
 	},
 	"meteor": {
