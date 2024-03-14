@@ -1,37 +1,34 @@
 {
-  "name": "meteor-template",
-  "private": true,
-  "scripts": {
-    "start": "meteor run --exclude-archs=web.browser.legacy",
-    "upgrade": "concurrently --prefix-colors auto --names meteor,node 'bun run upgrade:meteor' 'bun run upgrade:node'",
-    "upgrade:meteor": "meteor update --all-packages",
-    "upgrade:node": "npm-check-updates --upgrade && bun install",
-    "check": "tsc --noEmit --skipLibCheck",
-    "format": "prettier --write . --ignore-path .gitignore"
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.24.0",
-    "bootstrap": "^5.3.3",
-    "react": "^18.2.0",
-    "react-bootstrap": "^2.10.1",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.3",
-    "yup": "^1.4.0"
-  },
-  "devDependencies": {
-    "@types/meteor": "^2.9.8",
-    "@types/react": "^18.2.64",
-    "@types/react-dom": "^18.2.21",
-    "typescript": "^5.4.2"
-  },
-  "meteor": {
-    "mainModule": {
-      "client": "client/main.tsx",
-      "server": "server/main.ts"
-    }
-  },
-  "prettier": {
-    "printWidth": 150,
-    "singleAttributePerLine": true
-  }
+	"name": "meteor-template",
+	"private": true,
+	"scripts": {
+		"start": "meteor run --exclude-archs=web.browser.legacy",
+		"upgrade": "concurrently --prefix-colors auto --names meteor,node 'bun run upgrade:meteor' 'bun run upgrade:node'",
+		"upgrade:meteor": "meteor update --all-packages",
+		"upgrade:node": "npm-check-updates --upgrade && bun install",
+		"lint": "biome lint .",
+		"check": "biome check --apply-unsafe .",
+		"format": "biome format --write ."
+	},
+	"dependencies": {
+		"@babel/runtime": "^7.24.0",
+		"bootstrap": "^5.3.3",
+		"react": "^18.2.0",
+		"react-bootstrap": "^2.10.1",
+		"react-dom": "^18.2.0",
+		"react-router-dom": "^6.22.3",
+		"yup": "^1.4.0"
+	},
+	"devDependencies": {
+		"@types/meteor": "^2.9.8",
+		"@types/react": "^18.2.64",
+		"@types/react-dom": "^18.2.21",
+		"typescript": "^5.4.2"
+	},
+	"meteor": {
+		"mainModule": {
+			"client": "client/main.tsx",
+			"server": "server/main.ts"
+		}
+	}
 }
