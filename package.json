@@ -3,9 +3,9 @@
 	"private": true,
 	"scripts": {
 		"start": "meteor run --exclude-archs=web.browser.legacy",
-		"upgrade": "concurrently --prefix-colors auto --names meteor,node 'bun run upgrade:meteor' 'bun run upgrade:node'",
+		"upgrade": "concurrently --prefix-colors auto --names meteor,bun 'bun run upgrade:meteor' 'bun run upgrade:bun'",
 		"upgrade:meteor": "meteor update --all-packages",
-		"upgrade:node": "npm-check-updates --upgrade && bun install",
+		"upgrade:bun": "npm-check-updates --upgrade && bun install",
 		"lint": "biome lint .",
 		"check": "biome check --apply-unsafe .",
 		"format": "biome format --write ."
@@ -21,7 +21,7 @@
 	},
 	"devDependencies": {
 		"@types/meteor": "^2.9.8",
-		"@types/react": "^18.2.65",
+		"@types/react": "^18.2.66",
 		"@types/react-dom": "^18.2.22",
 		"typescript": "^5.4.2"
 	},
