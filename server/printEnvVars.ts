@@ -26,7 +26,7 @@ export const printEnvVars = () => {
 		(prev, curr) => (prev > curr.length ? prev : curr.length),
 		0,
 	);
-	withValue.forEach((x) =>
-		console.log(`${x.padEnd(longest)} : ${process.env[x]}`),
-	);
+	for (const x of withValue) {
+		console.log(`${x.padEnd(longest)} : ${process.env[x]}`);
+	}
 };
