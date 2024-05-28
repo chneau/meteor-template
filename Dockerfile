@@ -1,4 +1,4 @@
-FROM ghcr.io/chneau/meteor:2.15 AS builder
+FROM ghcr.io/chneau/meteor:3.0-rc.2 AS builder
 WORKDIR /app
 COPY --chown=meteor:meteor ./package*.json .
 RUN meteor npm ci
