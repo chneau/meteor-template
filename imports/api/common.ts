@@ -76,3 +76,16 @@ export const publishAll = <T extends Document>(
 		} as unknown as Mongo.Selector<T>),
 	);
 };
+
+type MeteorMethod = Parameters<typeof Meteor.methods>[0][string];
+export const meteorMethodFn = <T extends MeteorMethod>(
+	name: string,
+	method: T,
+) => {
+	if (Meteor.isServer) {
+		Meteor.methods({ [name]: method });
+	}
+	return (...args: Parameters<T>) => {
+		return Meteor.callAsync(name, ...args) as ReturnType<T>;
+	};
+};
