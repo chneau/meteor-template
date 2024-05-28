@@ -1,15 +1,15 @@
 declare module "meteor/meteor" {
-  namespace Meteor {
-    interface User {
-      roles?: import("imports/api/common").Role[] | null;
-    }
-  }
+	namespace Meteor {
+		interface User {
+			roles?: import("imports/api/common").Role[] | null;
+		}
+	}
 }
 
 declare module "meteor/mongo" {
-  namespace Mongo {
-    interface Collection<T extends import("mongodb").Document, U = T> {
-      _name: string;
-    }
-  }
+	namespace Mongo {
+		interface Collection<T extends import("mongodb").Document, U = T> {
+			_name: string;
+		}
+	}
 }
