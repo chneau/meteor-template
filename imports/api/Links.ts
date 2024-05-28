@@ -1,6 +1,12 @@
 import { Mongo } from "meteor/mongo";
 import { type InferType, object, string } from "yup";
-import { softRemoveAsyncFn, upsertAsyncFn } from "./common";
+import {
+	softRemoveAsyncFn,
+	subscribeAllFn,
+	subscribeOneFn,
+	subscribeSomeFn,
+	upsertAsyncFn,
+} from "./common";
 
 const LinkSchema = object({
 	_id: string().nullable(),
@@ -17,8 +23,8 @@ export const Links = {
 	removeAsync: LinksCollection.removeAsync.bind(LinksCollection),
 	upsertAsync: upsertAsyncFn(LinksCollection, LinkSchema),
 	softRemoveAsync: softRemoveAsyncFn(LinksCollection),
-	// subscribeAll: subscribeAll(LinksCollection),
-	// subscribeSome: subscribeSome(LinksCollection),
-	// subscribeOne: subscribeOne(LinksCollection),
+	subscribeAll: subscribeAllFn(LinksCollection),
+	subscribeSome: subscribeSomeFn(LinksCollection),
+	subscribeOne: subscribeOneFn(LinksCollection),
 	schema: LinkSchema,
 };
