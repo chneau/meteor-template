@@ -24,7 +24,7 @@ const insertAsync = async <T extends Document>(
 	return await collection.insertAsync(validated);
 };
 
-export const upsertAsync = async <T extends Document>(
+ const upsertAsync = async <T extends Document>(
 	collection: Mongo.Collection<T>,
 	schema: AnyObjectSchema,
 	doc: T,
@@ -35,7 +35,12 @@ export const upsertAsync = async <T extends Document>(
 	return insertAsync(collection, schema, doc);
 };
 
-export const softRemoveAsync = async <T extends Document>(
+export const upsertAsyncFn = <T extends Document>(
+	collection: Mongo.Collection<T>,
+	schema: AnyObjectSchema,
+) => async (doc: T) => upsertAsync(collection, schema, doc);
+
+ const softRemoveAsync = async <T extends Document>(
 	collection: Mongo.Collection<T>,
 	_id: string,
 ) => {
@@ -44,15 +49,26 @@ export const softRemoveAsync = async <T extends Document>(
 	});
 };
 
+export const softRemoveAsyncFn = <T extends Document>(
+	collection: Mongo.Collection<T>,
+) => async (_id: string) => softRemoveAsync(collection, _id);
+
 export const subscribeAll = <T extends Document>(
 	collection: Mongo.Collection<T>,
 ): (() => Mongo.Cursor<T>) => {
 	Meteor.subscribe(`${collection._name}.all`);
-	return () => collection.find();
+	return () =>
+		collection.find({
+			_deleted: { $ne: true },
+		} as unknown as Mongo.Selector<T>);
 };
 
 export const publishAll = <T extends Document>(
 	collection: Mongo.Collection<T>,
 ): void => {
-	Meteor.publish(`${collection._name}.all`, () => collection.find());
+	Meteor.publish(`${collection._name}.all`, () =>
+		collection.find({
+			_deleted: { $ne: true },
+		} as unknown as Mongo.Selector<T>),
+	);
 };
