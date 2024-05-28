@@ -11,14 +11,17 @@ Meteor.settings.packages = {
 	"accounts-base": { ambiguousErrorMessages: true },
 };
 
-Links.remove({});
-Links.insert({
+await Links.removeAsync({});
+await Links.upsertAsync({
 	title: "Do the Tutorial",
 	url: "https://www.meteor.com/tutorials/react/creating-an-app",
 });
-Links.insert({ title: "Follow the Guide", url: "http://guide.meteor.com" });
-Links.insert({ title: "Read the Docs", url: "https://docs.meteor.com" });
-Links.insert({ title: "Discussions", url: "https://forums.meteor.com" });
+Links.upsertAsync({
+	title: "Follow the Guide",
+	url: "http://guide.meteor.com",
+});
+Links.upsertAsync({ title: "Read the Docs", url: "https://docs.meteor.com" });
+Links.upsertAsync({ title: "Discussions", url: "https://forums.meteor.com" });
 
 const tryIgnore = (fn: () => void) => {
 	try {
@@ -27,9 +30,9 @@ const tryIgnore = (fn: () => void) => {
 };
 
 tryIgnore(() =>
-	Users.create({ username: "admin", password: "admin", roles: ["admin"] }),
+	Users.createAsync({ username: "admin", password: "admin", roles: ["admin"] }),
 );
-tryIgnore(() => Users.create({ username: "user", password: "user" }));
+tryIgnore(() => Users.createAsync({ username: "user", password: "user" }));
 
 // auto publish roles information to the user
 Meteor.publish(null, function () {

@@ -1,10 +1,9 @@
 import { type ReactNode, useContext } from "react";
 import { Navigate, Outlet, Route } from "react-router-dom";
-import type { Role } from "/imports/api/common";
 import { AccountContext } from "../contexts/AccountContext";
 
 interface AuthCheckProps {
-	roles?: Role[];
+	roles?: string[];
 	children: ReactNode;
 }
 
@@ -22,13 +21,13 @@ export const PrivateRoute = ({
 	path,
 	element,
 	roles,
-}: { path: string; element: ReactNode; roles?: Role[] }) => (
+}: { path: string; element: ReactNode; roles?: string[] }) => (
 	<Route path={path} element={<PrivateRouteGuard roles={roles} />}>
 		<Route path={path} element={element} />
 	</Route>
 );
 
-const PrivateRouteGuard = ({ roles }: { roles?: Role[] }) => {
+const PrivateRouteGuard = ({ roles }: { roles?: string[] }) => {
 	const { user, userId } = useContext(AccountContext);
 	if (userId != null && user == null) return <></>; // waits full data loading
 	if (roles == null) return <Outlet />;

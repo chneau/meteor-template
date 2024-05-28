@@ -1,42 +1,42 @@
 import { Accounts } from "meteor/accounts-base";
 import { Meteor } from "meteor/meteor";
-import { type ObjectSchema, array, boolean, date, object, string } from "yup";
-import { type Role, updateMethod } from "./common";
+import { type InferType, array, boolean, date, object, string } from "yup";
 
-export interface User extends Meteor.User {}
+const allRoles = ["admin"] as const;
+export type Role = (typeof allRoles)[number];
 
-const UserEmailSchema: ObjectSchema<Meteor.UserEmail> = object({
+const UserEmailSchema = object({
 	address: string().required().label("Email"),
 	verified: boolean().required().label("Verified"),
 });
 
-const UserSchema: ObjectSchema<User> = object({
+const UserSchema = object({
 	_id: string().required(),
 	username: string().label("Username"),
-	emails: array().of(UserEmailSchema).required().label("Emails"),
+	emails: array().of(UserEmailSchema).label("Emails"),
 	createdAt: date().label("Created At"),
 	profile: object().label("Profile"),
 	services: object().label("Services"),
-	roles: array().of(string<Role>().required()).nullable().label("Roles"),
+	roles: array().of(string<Role>().required()).label("Roles"),
 });
+
+export type User = InferType<typeof UserSchema>;
 
 const UsersCollection = Meteor.users;
 
 type AccountsCreateUserOptions = Parameters<typeof Accounts.createUser>[0];
-interface CreateWithRolesOptions extends AccountsCreateUserOptions {
-	roles?: Role[];
-}
+type CreateWithRolesOptions = AccountsCreateUserOptions & { roles?: Role[] };
 
-const create = (options: CreateWithRolesOptions) => {
-	const userId = Accounts.createUser(options);
-	if (userId) Meteor.users.update(userId, { $set: { roles: options.roles } });
+const createAsync = async (options: CreateWithRolesOptions) => {
+	const userId = await Accounts.createUserAsync(options);
+	if (userId)
+		await Meteor.users.updateAsync(userId, { $set: { roles: options.roles } });
 	return userId;
 };
 
 export const Users = {
 	find: UsersCollection.find.bind(UsersCollection),
-	create,
-	update: updateMethod(UsersCollection, UserSchema, ["admin"]),
+	createAsync,
 	loginWithPassword: Meteor.loginWithPassword?.bind(Meteor),
 	logout: Accounts.logout?.bind(Accounts),
 	schema: UserSchema,
