@@ -24,7 +24,6 @@
 
 		/* Module Resolution Options */
 		"baseUrl": ".",
-		/* Support absolute /imports/* with a leading '/' */
 		"paths": { "/*": ["*"] },
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
