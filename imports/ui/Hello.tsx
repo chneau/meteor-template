@@ -1,18 +1,18 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useCounter } from "react-use";
 import { Users } from "../api/Users";
 import { Authorize } from "./components/Authorize";
 import { AccountContext } from "./contexts/AccountContext";
 
 export const Hello = () => {
-	const [counter, setCounter] = useState(0);
-	const increment = () => setCounter((prev) => prev + 1);
+	const [counter, { inc }] = useCounter(0);
 	const { user } = useContext(AccountContext);
 	return (
 		<div>
 			<h1>Welcome to Meteor!</h1>
-			<Button onClick={increment}>Click Me</Button>
+			<Button onClick={() => inc()}>Click Me</Button>
 			<p>You've pressed the button {counter} times.</p>
 			<ButtonGroup>
 				<Button
