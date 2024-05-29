@@ -105,10 +105,12 @@ export const subscribeAllFn = <T extends Document>(
 	collection: Mongo.Collection<T>,
 ) => {
 	const name = `${collection._name}.all`;
-	const publish = () =>
-		collection.find({
+	const publish: MeteorPublish = function () {
+		if (!this.userId) return this.ready();
+		return collection.find({
 			_deleted: { $ne: true },
 		} as unknown as Mongo.Selector<T>);
+	};
 	return meteorSubscribeFn(name, publish);
 };
 
@@ -116,8 +118,12 @@ export const subscribeSomeFn = <T extends Document>(
 	collection: Mongo.Collection<T>,
 ) => {
 	const name = `${collection._name}.some`;
-	const publish = (ids: string[]) =>
-		collection.find({ _id: { $in: ids } } as unknown as Mongo.Selector<T>);
+	const publish: MeteorPublish = function (ids: string[]) {
+		if (!this.userId) return this.ready();
+		return collection.find({
+			_id: { $in: ids },
+		} as unknown as Mongo.Selector<T>);
+	};
 	return meteorSubscribeFn(name, publish);
 };
 
@@ -125,7 +131,9 @@ export const subscribeOneFn = <T extends Document>(
 	collection: Mongo.Collection<T>,
 ) => {
 	const name = `${collection._name}.one`;
-	const publish = (_id: string) =>
-		collection.find({ _id } as unknown as Mongo.Selector<T>);
+	const publish: MeteorPublish = function (_id: string) {
+		if (!this.userId) return this.ready();
+		return collection.find({ _id } as unknown as Mongo.Selector<T>);
+	};
 	return meteorSubscribeFn(name, publish);
 };

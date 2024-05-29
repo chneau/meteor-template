@@ -4,8 +4,8 @@ import { Hello } from "../Hello";
 import { Info } from "../Info";
 
 export const HomePage = () => {
-	const sub = useTracker(() => Links.subscribeAll());
-	const links = useFind(() => Links.find({}), [sub.ready()]);
+	useTracker(() => Links.subscribeAll());
+	const links = useFind(() => Links.find({}));
 	return (
 		<>
 			<Hello />
