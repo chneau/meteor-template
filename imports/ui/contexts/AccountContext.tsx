@@ -2,13 +2,11 @@ import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
 import { type ReactNode, createContext } from "react";
 
-interface AccountInfo {
+type AccountInfo = {
 	user?: Meteor.User;
 	userId?: string;
-}
-
+};
 export const AccountContext = createContext({} as AccountInfo);
-
 export const AccountProvider = ({ children }: { children: ReactNode }) => {
 	const account = useTracker(() => {
 		const userId = Meteor.userId() ?? undefined;

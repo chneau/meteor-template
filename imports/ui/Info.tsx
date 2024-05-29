@@ -1,13 +1,10 @@
-interface Link {
+type Link = {
 	_id?: string | null;
 	title: string;
 	url: string;
-}
+};
 
-interface InfoProps {
-	links: Link[];
-}
-
+type InfoProps = { links: Link[] };
 export const Info = ({ links }: InfoProps) => (
 	<div>
 		<h2>Learn Meteor!</h2>

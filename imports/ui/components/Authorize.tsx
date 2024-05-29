@@ -2,11 +2,10 @@ import { type ReactNode, useContext } from "react";
 import { Navigate, Outlet, Route } from "react-router-dom";
 import { AccountContext } from "../contexts/AccountContext";
 
-interface AuthCheckProps {
+type AuthCheckProps = {
 	roles?: string[];
 	children: ReactNode;
-}
-
+};
 export const Authorize = ({ roles, children }: AuthCheckProps) => {
 	const { user } = useContext(AccountContext);
 	if (

@@ -1,35 +1,35 @@
 {
-  "name": "meteor-template",
-  "private": true,
-  "scripts": {
-    "start": "meteor run --exclude-archs=web.browser.legacy",
-    "upgrade": "concurrently --prefix-colors auto --names meteor,bun 'bun run upgrade:meteor' 'bun run upgrade:bun'",
-    "upgrade:meteor": "meteor update --all-packages",
-    "upgrade:bun": "npm-check-updates --upgrade --install=always --packageManager=bun",
-    "lint": "biome lint .",
-    "check": "biome check --apply-unsafe .",
-    "format": "biome format --write ."
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.24.6",
-    "bootstrap": "^5.3.3",
-    "bson": "^6.7.0",
-    "react": "^18.3.1",
-    "react-bootstrap": "^2.10.2",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.23.1",
-    "yup": "^1.4.0"
-  },
-  "devDependencies": {
-    "@types/meteor": "^2.9.8",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "typescript": "^5.4.5"
-  },
-  "meteor": {
-    "mainModule": {
-      "client": "client/main.tsx",
-      "server": "server/main.ts"
-    }
-  }
+	"name": "meteor-template",
+	"private": true,
+	"scripts": {
+		"start": "meteor run --exclude-archs=web.browser.legacy",
+		"upgrade": "concurrently --prefix-colors auto --names meteor,bun 'bun run upgrade:meteor' 'bun run upgrade:bun'",
+		"upgrade:meteor": "meteor update --all-packages",
+		"upgrade:bun": "npm-check-updates --upgrade --install=always --packageManager=bun",
+		"lint": "tsc --noEmit --skipLibCheck",
+		"check": "biome check --apply-unsafe ."
+	},
+	"dependencies": {
+		"@babel/runtime": "^7.24.6",
+		"bootstrap": "^5.3.3",
+		"bson": "^6.7.0",
+		"react": "^18.3.1",
+		"react-bootstrap": "^2.10.2",
+		"react-dom": "^18.3.1",
+		"react-router-dom": "^6.23.1",
+		"react-use": "^17.5.0",
+		"yup": "^1.4.0"
+	},
+	"devDependencies": {
+		"@types/meteor": "^2.9.8",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"typescript": "^5.4.5"
+	},
+	"meteor": {
+		"mainModule": {
+			"client": "client/main.tsx",
+			"server": "server/main.ts"
+		}
+	}
 }

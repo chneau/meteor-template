@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
-interface CreateLinkProps {
+type CreateLinkProps = {
 	onCreated: (link: { title: string; url: string }) => void;
-}
-
+};
 export const CreateLink = ({ onCreated }: CreateLinkProps) => {
 	const [title, setTitle] = useState("");
 	const [url, setUrl] = useState("");
