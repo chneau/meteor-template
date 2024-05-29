@@ -11,6 +11,11 @@ Meteor.settings.packages = {
 	"accounts-base": { ambiguousErrorMessages: true },
 };
 
+Meteor.publish(null, function () {
+	if (!this.userId) return this.ready();
+	return Users.find({ _id: this.userId });
+});
+
 await Links.removeAsync({});
 await Links.upsertAsync({
 	title: "Do the Tutorial",
@@ -35,9 +40,3 @@ await Users.createAsync({
 	roles: ["admin"],
 }).catch(() => 0);
 await Users.createAsync({ username: "user", password: "user" }).catch(() => 0);
-
-// auto publish roles information to the user
-Meteor.publish(null, function () {
-	if (!this.userId) return this.ready();
-	return Users.find({ _id: this.userId });
-});
