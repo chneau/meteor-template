@@ -1,14 +1,14 @@
-import { useContext } from "react";
+import { Meteor } from "meteor/meteor";
+import { useTracker } from "meteor/react-meteor-data";
 import { Button, ButtonGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useCounter } from "react-use";
 import { Users } from "../api/Users";
 import { Authorize } from "./components/Authorize";
-import { AccountContext } from "./contexts/AccountContext";
 
 export const Hello = () => {
 	const [counter, { inc }] = useCounter(0);
-	const { user } = useContext(AccountContext);
+	const user = useTracker(() => Meteor.user());
 	return (
 		<div>
 			<h1>Welcome to Meteor!</h1>

@@ -1,13 +1,14 @@
-import { type ReactNode, useContext } from "react";
+import { Meteor } from "meteor/meteor";
+import { useTracker } from "meteor/react-meteor-data";
+import type { ReactNode } from "react";
 import { Navigate, Outlet, Route } from "react-router-dom";
-import { AccountContext } from "../contexts/AccountContext";
 
 type AuthCheckProps = {
 	roles?: string[];
 	children: ReactNode;
 };
 export const Authorize = ({ roles, children }: AuthCheckProps) => {
-	const { user } = useContext(AccountContext);
+	const user = useTracker(() => Meteor.user());
 	if (
 		user == null ||
 		(Array.isArray(roles) && !user?.roles?.some((role) => roles.includes(role)))
@@ -27,7 +28,10 @@ export const PrivateRoute = ({
 );
 
 const PrivateRouteGuard = ({ roles }: { roles?: string[] }) => {
-	const { user, userId } = useContext(AccountContext);
+	const { user, userId } = useTracker(() => ({
+		user: Meteor.user(),
+		userId: Meteor.userId(),
+	}));
 	if (userId != null && user == null) return <></>; // waits full data loading
 	if (roles == null) return <Outlet />;
 	if (user == null) return <Navigate to="/" />;
