@@ -7,7 +7,7 @@
 		"upgrade:meteor": "meteor update --all-packages",
 		"upgrade:bun": "npm-check-updates --upgrade --install=always --packageManager=bun",
 		"lint": "tsc --noEmit --skipLibCheck",
-		"check": "biome check --apply-unsafe ."
+		"check": "biome check --write --unsafe ."
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.24.6",
