@@ -5,5 +5,5 @@ standard-minifier-js
 typescript
 hot-module-replacement
 static-html
-react-meteor-data
+react-meteor-data@3.0.0-rc.0
 accounts-password
