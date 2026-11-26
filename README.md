@@ -1,7 +1,24 @@
 # meteor-template
 
-A Meteor template using Typescript, React and Bootstrap
+Meteor starter with React, TypeScript, Bootstrap and Docker support.
 
-## Strongly typed Meteor methods and subscribe
+## Usage
 
-Trying stuff right now, WIP.
+```bash
+bun install
+bun start
+```
+
+The app runs on http://localhost:3000. `bun run lint` type-checks the project and `bun run check` formats and lints it.
+
+## Docker
+
+```bash
+docker compose up
+```
+
+This repository is a GitHub template, so it can be used directly for new Meteor projects.
+
+## License
+
+MIT
